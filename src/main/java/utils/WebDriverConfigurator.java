@@ -14,7 +14,7 @@ public class WebDriverConfigurator {
         System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/geckodriver");
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public static void closeBrowser() {
