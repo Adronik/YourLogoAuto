@@ -20,7 +20,7 @@ public class BasePage extends PageFactory {
     }
 
     public static void waitForElement(WebElement webElement) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
