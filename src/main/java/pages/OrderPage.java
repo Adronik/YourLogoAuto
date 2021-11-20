@@ -36,6 +36,27 @@ public class OrderPage extends BasePage {
     @FindBy(xpath = "//p[@class='cart_navigation clearfix']/a[@title='Proceed to checkout']")
     private WebElement proceedCheckout;
 
+    @FindBy(xpath = "//button[@name='processAddress']")
+    private WebElement proceedAddress;
+
+    @FindBy(id = "uniform-cgv")
+    private WebElement termsOfService;
+
+    @FindBy(xpath = "//button/span[contains(text(), 'Proceed to checkout')]")
+    private WebElement submitToPayment;
+
+    @FindBy(xpath = "//a[@class='bankwire']")
+    private WebElement bankWirePayment;
+
+    @FindBy(xpath = "//*[contains(text(), 'I confirm my order')]")
+    private WebElement confirmOrderBtn;
+
+    @FindBy(xpath = "//*[@class='page-heading']")
+    private WebElement confirmOrderText;
+
+    @FindBy(xpath = "//a[@title='Back to orders']")
+    private WebElement backToOrdersLink;
+
 
 
     public String getDeliveryName() {
@@ -113,6 +134,42 @@ public class OrderPage extends BasePage {
     public void clickProceed() {
         waitForElement(proceedCheckout);
         proceedCheckout.click();
+    }
+
+    public void clickProceedAddress() {
+        waitForElement(proceedAddress);
+        proceedAddress.click();
+    }
+
+    public void checkTermsOfService() {
+        waitForElement(termsOfService);
+        termsOfService.click();
+    }
+
+    public void clickSubmitToPayment() {
+        waitForElement(submitToPayment);
+        submitToPayment.click();
+    }
+
+    public void selectBankWirePayment() {
+        waitForElement(bankWirePayment);
+        bankWirePayment.click();
+    }
+
+    public void clickConfirmOrder() {
+        waitForElement(confirmOrderBtn);
+        confirmOrderBtn.click();
+    }
+
+    public void assertConfirmationText(String text) {
+        waitForElement(confirmOrderText);
+        assertEquals(confirmOrderText.getText(), text);
+    }
+
+    public OrderHistoryPage clickBackToOrders() {
+        waitForElement(backToOrdersLink);
+        backToOrdersLink.click();
+        return new OrderHistoryPage();
     }
 
 }

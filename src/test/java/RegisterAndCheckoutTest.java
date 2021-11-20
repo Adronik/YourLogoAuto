@@ -1,16 +1,12 @@
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.LoggedInUserPage;
-import pages.NewAccountPage;
-import pages.OrderPage;
-import pages.SignInPage;
+import pages.*;
 import utils.Navigation;
 import utils.User;
 import utils.UserList;
 import utils.WebDriverConfigurator;
 import java.util.Random;
-import static org.testng.Assert.assertEquals;
 
 
 public class RegisterAndCheckoutTest {
@@ -27,6 +23,7 @@ public class RegisterAndCheckoutTest {
         Random generator = new Random();
         int randomInt = generator.nextInt(9999);
         String email = "username" + randomInt + "@gmail.com";
+        String confirmation_text = "ORDER CONFIRMATION";
 
         SignInPage signInPage = Navigation.openHomePage().clickOnSignIn();
         NewAccountPage newAccountPage = signInPage.registerEmail(email);
@@ -45,11 +42,19 @@ public class RegisterAndCheckoutTest {
         orderPage.assertInvoiceAddress(newUser);
         orderPage.assertInvoiceCity(newUser);
         orderPage.assertInvoiceMobile(newUser);
+        orderPage.clickProceed();
+        orderPage.clickProceedAddress();
+        orderPage.checkTermsOfService();
+        orderPage.clickSubmitToPayment();
+        orderPage.selectBankWirePayment();
+        orderPage.clickConfirmOrder();
+        orderPage.assertConfirmationText(confirmation_text);
+        OrderHistoryPage orderHistoryPage = orderPage.clickBackToOrders();
     }
 
     @AfterMethod
     public void afterEachTest() {
-        WebDriverConfigurator.closeBrowser();
+        //WebDriverConfigurator.closeBrowser();
     }
 
 }
