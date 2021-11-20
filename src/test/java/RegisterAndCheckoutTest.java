@@ -50,11 +50,13 @@ public class RegisterAndCheckoutTest {
         orderPage.clickConfirmOrder();
         orderPage.assertConfirmationText(confirmation_text);
         OrderHistoryPage orderHistoryPage = orderPage.clickBackToOrders();
+        orderHistoryPage.clickOrderLink();
+        orderHistoryPage.assertCorrectProductInOrderHistory(shirt_name);
     }
 
     @AfterMethod
     public void afterEachTest() {
-        //WebDriverConfigurator.closeBrowser();
+        WebDriverConfigurator.closeBrowser();
     }
 
 }
